@@ -39,7 +39,7 @@ class Board {
     double imageSaveInterval = 1;
     double textSaveInterval = 1;
     final double FLASH_SPEED = 80;
-    boolean userControl;
+    boolean userControl, fastDraw;
     double temperature;
     double MANUAL_BIRTH_SIZE = 1.2;
     boolean wasPressingB = false;
@@ -95,7 +95,8 @@ class Board {
             fileSaveCounts[i] = 0;
             fileSaveTimes[i] = -999;
         }
-        userControl = true;
+        userControl = false;
+        fastDraw = false;
         timeStep = ts;
         populationHistory = new int[POPULATION_HISTORY_LENGTH];
         for(int i = 0; i < POPULATION_HISTORY_LENGTH; i++) {
@@ -206,7 +207,7 @@ class Board {
             String[] buttonTexts = {"Brain Control", "Maintain pop. at "+creatureMinimum,
             "Screenshot now", "-   Image every "+nf((float)imageSaveInterval, 0, 2)+" years   +",
             "Text file now", "-    Text every "+nf((float)textSaveInterval, 0, 2)+" years    +",
-            "-    Play Speed ("+playSpeed+"x)    +", "This button does nothing"};
+            "-    Play Speed ("+playSpeed+"x)    +", fastDraw?"Normal Speed":"Fast Forward"};
             if (userControl) {
                 buttonTexts[0] = "Keyboard Control";
             }
