@@ -71,7 +71,9 @@ void draw() {
         rotate(cameraR);
     }
     translate(-cameraX*SCALE_TO_FIX_BUG, -cameraY*SCALE_TO_FIX_BUG);
-    evoBoard.drawBoard(SCALE_TO_FIX_BUG, zoom, (int)toWorldXCoordinate(mouseX, mouseY), (int)toWorldYCoordinate(mouseX, mouseY));
+    if(!evoBoard.fastDraw){
+        evoBoard.drawBoard(SCALE_TO_FIX_BUG, zoom, (int)toWorldXCoordinate(mouseX, mouseY), (int)toWorldYCoordinate(mouseX, mouseY));
+    }
     popMatrix();
     evoBoard.drawUI(SCALE_TO_FIX_BUG, TIME_STEP, WINDOW_HEIGHT, 0, WINDOW_WIDTH, WINDOW_HEIGHT, font);
 
@@ -153,6 +155,8 @@ void mousePressed() {
                             evoBoard.playSpeed *= 2;
                         }
                     }
+                }else if(buttonNum==7){
+                    evoBoard.fastDraw=!evoBoard.fastDraw;
                 }
             }
         } else if (mouseX >= height+10 && mouseX < width-50 && evoBoard.selectedCreature == null) {
